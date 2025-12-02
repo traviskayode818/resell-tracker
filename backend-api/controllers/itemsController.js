@@ -54,4 +54,19 @@ export async function sellItem(req, res) {
   }
 }
 
+import { getItems as getItemsService } from '../services/itemsService.js'
+
+export async function getItems(req, res) {
+  try {
+    const items = await getItemsService()
+    return res.status(200).json(items)
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ error: err.message })
+  }
+}
+
+
+
+
 

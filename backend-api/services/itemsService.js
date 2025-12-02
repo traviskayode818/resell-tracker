@@ -88,5 +88,20 @@ export async function sellItem(itemId, saleData) {
   }
 }
 
+export async function getItems() {
+  const { data: items, error } = await supabase
+    .from('items')
+    .select('*')
+    .order('id', { ascending: true })  // optional but nice
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return items
+}
+
+
+
 
 

@@ -4,6 +4,7 @@ import itemsRoutes from './routes/itemsRoutes.js'
 
 // Creating Express APP - to create server instance 
 const app = express()
+app.use(cors()) 
 app.use(express.json()) 
 
 // Mount routes
@@ -14,3 +15,9 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
 })
+
+import cors from 'cors'
+
+
+
+

@@ -1,0 +1,138 @@
+
+/* Make the whole page look clean and centered */
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;   /* <-- was 20px, now 40px top padding */
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+
+/* Header section (title + subtitle) */
+.app-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.app-header p {
+  color: #ffffff;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Items section spacing */
+.items-section {
+  margin-top: 20px;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Each item row */
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background-color: #ffffff0d; /* subtle on dark, subtle on light */
+  border: 1px solid #ffffff1a;
+}
+
+/* Left side: name + size */
+.item-main {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.item-name {
+  font-weight: 600;
+}
+
+.item-size {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Right side: prices + status */
+.item-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9rem;
+  align-items: center;
+}
+
+.item-status {
+  font-weight: 600;
+}
+
+/* Status colouring (optional, adjust to your statuses) */
+.item-status-in_stock {
+  color: #4caf50;
+}
+
+.item-status-sold {
+  color: #f44336;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-bar button {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.9rem;
+}
+
+.filter-bar button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-active {
+  background: #007aff;
+  border-color: #007aff;
+}
+
+.add-item-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #22c55e; /* green-ish */
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.add-item-btn:hover {
+  background: #16a34a;
+  transform: translateY(-1px);
+}
+
+.add-item-placeholder {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  opacity: 0.9;
+}

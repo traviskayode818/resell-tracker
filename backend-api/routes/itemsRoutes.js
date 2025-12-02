@@ -10,6 +10,9 @@ import { sellItem } from '../controllers/itemsController.js'
 
 router.post('/:id/sell', sellItem)
 
+import { getItems } from '../controllers/itemsController.js'
+
+router.get('/', getItems)
 
 
 export default router
