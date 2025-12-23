@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'resell-tracker-production.up.railway.app'
+export const API_BASE_URL = 'https://resell-tracker-production.up.railway.app/api';
