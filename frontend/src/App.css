@@ -1,70 +1,247 @@
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
 
-/* Make the whole page look clean and centered */
-.app {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;   /* <-- was 20px, now 40px top padding */
-  font-family: Arial, sans-serif;
-  color: #fff;
-}
-
-
-/* Header section (title + subtitle) */
-.app-header {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.app-header h1 {
-  font-size: 2rem;
-  margin-bottom: 5px;
-}
-
-.app-header p {
-  color: #ffffff;
-  font-size: 1rem;
+/* Remove default body margin for full-page layout */
+body {
   margin: 0;
 }
 
-/* Items section spacing */
+/* ============================================
+   LAYOUT COMPONENTS
+   ============================================ */
+
+/* Full-page gradient background container */
+.app-root {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #4f46e5, #6366f1, #a855f7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Centered container with max-width constraint */
+.app-shell {
+  width: 100%; 
+  max-width: 1600px;
+  padding: 32px 16px 48px;
+}
+/* Header section styling */
+.app-header {
+  color: #f9fafb;
+  margin-bottom: 24px;
+}
+
+/* Main content card with shadow and rounded corners */
+.app-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px 20px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+}
+
+.app-card h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+  color: #111827;
+}
+/* ============================================
+   TAB-STYLE NAVIGATION
+   ============================================ */
+
+/* Navigation container */
+.app-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 0;
+}
+
+/* Individual tab styling */
+.nav-tab {
+  /* Size and spacing */
+  padding: 16px 32px;
+  
+  /* Appearance */
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  
+  /* Border and shape */
+  border: 3px solid transparent;
+  border-radius: 16px;
+  
+  /* Animation */
+  transition: all 0.3s ease;
+  
+  /* Cursor */
+  cursor: pointer;
+}
+
+/* Hover state for inactive tabs */
+.nav-tab:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Active tab styling (selected) */
+.nav-tab.active {
+  background: #ffffff;
+  color: #5b21b6;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ============================================
+   SUMMARY STATISTICS SECTION
+   ============================================ */
+
+/* Grid layout for summary cards (4 columns) */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Individual summary card styling */
+.summary-card {
+  background: #eef2ff;
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+/* Label text for summary metrics */
+.summary-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 0 0 4px;
+}
+
+/* Value display for summary metrics */
+.summary-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+/* ============================================
+   FILTER BAR & TOOLBAR
+   ============================================ */
+
+/* Container for filter buttons */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Individual filter button styling */
+.filter-bar button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  transition: 0.15s;
+  font-size: 0.9rem;
+}
+
+/* Hover state for filter buttons */
+.filter-bar button:hover {
+  background: #eef2ff;
+}
+
+/* Active/selected filter button state */
+.filter-active {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+}
+
+/* ============================================
+   ITEMS LIST SECTION
+   ============================================ */
+
+/* Spacing for items section */
 .items-section {
   margin-top: 20px;
 }
 
+/* Vertical list container for items */
 .items-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Each item row */
+/* Individual item row container */
 .item-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  border-radius: 6px;
-  background-color: #ffffff0d; /* subtle on dark, subtle on light */
-  border: 1px solid #ffffff1a;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
 }
 
-/* Left side: name + size */
+/* ============================================
+   ITEM DETAILS
+   ============================================ */
+
+/* Left side container: item name and size */
 .item-main {
   display: flex;
   align-items: baseline;
   gap: 6px;
 }
 
+/* Item name text styling */
 .item-name {
   font-weight: 600;
+  color: #111827;
 }
 
+/* Item size text styling (muted) */
 .item-size {
   font-size: 0.9rem;
-  color: #aaa;
+  color: #6b7280;
 }
 
-/* Right side: prices + status */
+.item-purchase-date {
+  font-size: 0.9rem;
+  color: #6b7280
+}
+
+/* Price display styling */
+.item-price {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+/* Profit display styling (green) */
+.item-profit {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.item-sold-date {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-left: 8px;
+}
+
+/* Right side container: metadata, prices, status, and actions */
 .item-meta {
   display: flex;
   gap: 10px;
@@ -72,62 +249,151 @@
   align-items: center;
 }
 
+/* ============================================
+   ITEM STATUS BADGES
+   ============================================ */
+
+/* Base styling for status badges */
 .item-status {
   font-weight: 600;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
 }
 
-/* Status colouring (optional, adjust to your statuses) */
-.item-status-in_stock {
-  color: #4caf50;
+/* Status badge for available items (green) */
+.item-status-available {
+  background: #dcfce7;
+  color: #166534;
 }
 
+/* Status badge for sold items (red) */
 .item-status-sold {
-  color: #f44336;
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
-.filter-bar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+/* ============================================
+   BUTTONS & ACTIONS
+   ============================================ */
 
-.filter-bar button {
-  padding: 6px 14px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  cursor: pointer;
-  transition: 0.2s;
-  font-size: 0.9rem;
-}
-
-.filter-bar button:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.filter-active {
-  background: #007aff;
-  border-color: #007aff;
-}
-
+/* Primary action button (Add Item, Save) */
 .add-item-btn {
   padding: 8px 16px;
   border-radius: 6px;
   border: none;
-  background: #22c55e; /* green-ish */
-  color: #fff;
+  background: #22c55e;
+  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background 0.2s, transform 0.1s;
 }
 
+/* Hover state for primary action button */
 .add-item-btn:hover {
   background: #16a34a;
   transform: translateY(-1px);
 }
 
+/* Cancel button styling (transparent with border) */
+.cancel-btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: #000000;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* Delete button styling */
+.delete-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: none;
+  background: #dc2626; /* Red */
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.delete-btn:hover {
+  background: #b91c1c; /* Darker red */
+}
+
+/* Sell button for available items */
+.sell-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(31, 28, 28, 0.3);
+  background: transparent;
+  color: #2a2727;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Confirm sell button (orange) */
+.confirm-sell-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #f97316;
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+
+/* Add item form container */
+.add-item-form {
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.add-item-form h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+/* Form row container for input fields */
+.form-row {
+  margin-bottom: 10px;
+}
+
+/* Label styling for form inputs */
+.form-row label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  gap: 4px;
+}
+
+/* Input field styling within forms */
+.form-row input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+}
+
+/* Form action buttons container */
+.form-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+/* Placeholder for add item button (unused) */
 .add-item-placeholder {
   margin-bottom: 16px;
   padding: 12px;
@@ -135,4 +401,222 @@
   border: 1px dashed rgba(255, 255, 255, 0.4);
   font-size: 0.9rem;
   opacity: 0.9;
+}
+
+/* ============================================
+   SELL FORM (INLINE)
+   ============================================ */
+
+/* Inline sell form container */
+.sell-form {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Input fields within sell form */
+.sell-form input {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE STYLES
+   ============================================ */
+
+/* Tablet and below (768px and smaller) */
+@media (max-width: 768px) {
+  
+  /* Make summary grid 2 columns instead of 4 */
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Reduce padding on shell */
+  .app-shell {
+    padding: 16px 8px 24px;
+  }
+  
+  /* Reduce padding on card */
+  .app-card {
+    padding: 16px 12px;
+  }
+  
+  /* Make header text smaller */
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .app-header p {
+    font-size: 0.9rem;
+  }
+  
+  /* Stack item rows vertically */
+  .item-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  /* Stack item meta info */
+  .item-meta {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  /* Make filter bar scroll horizontally if needed */
+  .filter-bar {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  /* Make tabs smaller on mobile */
+  .nav-tab {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+  
+  /* Sell form on mobile */
+  .sell-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .sell-form input,
+  .sell-form select {
+    width: 100%;
+  }
+}
+
+/* Phone only (480px and smaller) */
+@media (max-width: 480px) {
+  
+  /* Single column for summary */
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Smaller tabs */
+  .nav-tab {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  
+  /* Smaller card title */
+  .app-card h2 {
+    font-size: 1.1rem;
+  }
+  
+  /* Reduce font sizes */
+  .item-name {
+    font-size: 0.95rem;
+  }
+  
+  .item-price,
+  .item-profit {
+    font-size: 0.85rem;
+  }
+}
+/* ============================================
+   DASHBOARD STYLES
+   ============================================ */
+
+/* Period selector buttons */
+.period-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.period-selector button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+
+.period-selector button:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.period-selector button.active {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Individual stat card */
+.stat-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .period-selector {
+    flex-wrap: wrap;
+  }
+  
+  .period-selector button {
+    flex: 1;
+    min-width: 100px;
+  }
+}
+
+.stat-percentage {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 8px 0 0 0;
+}
+
+.stat-percentage.up {
+  color: #16a34a; /* Green */
+}
+
+.stat-percentage.down {
+  color: #dc2626; /* Red */
+}
+
+.stat-percentage.neutral {
+  color: #6b7280; /* Gray */
 }

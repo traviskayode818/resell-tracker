@@ -1,18 +1,39 @@
-import { Router } from 'express'
-import { createItem } from '../controllers/itemsController.js'
+/**
+ * Items Routes
+ * Defines API endpoints for item management
+ * Base path: /api/items
+ */
 
-const router = Router()
+import { Router } from 'express';
+import {
+  createItem,
+  sellItem,
+  getItems,
+  deleteItem,
+} from '../controllers/itemsController.js';
 
-// POST /api/items
-router.post('/', createItem)
+const router = Router();
 
-import { sellItem } from '../controllers/itemsController.js'
+/**
+ * GET /api/items
+ * Retrieve all items from inventory
+ */
+router.get('/', getItems);
 
-router.post('/:id/sell', sellItem)
+/**
+ * POST /api/items
+ * Create a new item in inventory
+ * Required body fields: name, purchase_price, size, purchase_date
+ */
+router.post('/', createItem);
 
-import { getItems } from '../controllers/itemsController.js'
+/**
+ * POST /api/items/:id/sell
+ * Mark an item as sold
+ * Required body fields: sale_price, sale_date, method
+ */
+router.post('/:id/sell', sellItem);
 
-router.get('/', getItems)
+router.delete('/:id', deleteItem);
 
-
-export default router
+export default router;
