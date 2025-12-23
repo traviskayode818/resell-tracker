@@ -1,5 +1,6 @@
 import 'dotenv/config'
-import express from 'express' //To create and API server
+import express from 'express'
+import cors from 'cors'  // ✅ Move this to the top!
 import itemsRoutes from './routes/itemsRoutes.js'
 
 // Creating Express APP - to create server instance 
@@ -10,12 +11,15 @@ app.use(express.json())
 // Mount routes
 app.use('/api/items', itemsRoutes)
 
-app.listen(3000, '0.0.0.0', () => {
-  console.log('Sever running on port 3000')
+// Add a root route for testing
+app.get('/', (req, res) => {
+  res.json({ message: 'Resell Tracker API is running!' });
 });
 
-import cors from 'cors'
-
-
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`)
+});
 
 
