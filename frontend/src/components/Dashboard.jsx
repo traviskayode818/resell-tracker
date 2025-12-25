@@ -1,5 +1,20 @@
 import { useState, useEffect } from 'react';
 import { API_BASE_URL } from '../config';
+import {
+  LineChart,
+  Line,
+  Area,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  PieChart,
+  AreaChart
+} from 'recharts';
 
 
 function Dashboard() {
@@ -32,6 +47,7 @@ function Dashboard() {
 
   // Calculate stats
   const stats = calculateStats(items, timePeriod);
+  const chartData = prepareChartData(items);
   console.log('Stats:', stats);  // ← Add this
   console.log('Revenue Change:', stats.revenueChange);  // ← Add this
   console.log('Previous dates:', stats.previousEndDate.getDate());
@@ -91,8 +107,45 @@ function Dashboard() {
           </p>
         </div>        
       </div>
-
-      {/* Chart will go here later */}
+      <div className='chart-container'>
+        <h3>Profit Trend</h3>
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart data={chartData}>
+            <CartesianGrid strokeDasharray='3 3'/>
+            <XAxis dataKey='month'/>
+            <YAxis/>
+            <Tooltip/>
+            <Legend/>
+            <Area
+            type='linear'
+            dataKey='revenue'
+            stroke='#002e6dff'
+            fill='#00347cff'
+            fillOpacity={0.3}
+            />
+            <Area
+            type='linear'
+            dataKey='profit'
+            stroke='#02aa40ff'
+            fill='#00b141ff'
+            fillOpacity={0.3}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="chart-container">
+      <h3>Sales Trend</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <PieChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="sales" fill="#0047AB" name="Items Sold" />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
     </div>
   );
 }
@@ -318,5 +371,48 @@ function calculateStats(items, period) {
   };
 }
 
+function prepareChartData(items, period) {
+  const soldItems = items.filter(item => item.status === 'SOLD' && item.sold_date);
+
+  const monthGroups = {}; 
+
+  soldItems.forEach(item => {
+    const date = new Date(item.sold_date);
+    const monthName = date.toLocaleString('en-US', {month: 'short'});
+
+    if (!monthGroups[monthName]) {
+      monthGroups[monthName] = [];
+    }
+
+    monthGroups[monthName].push(item);
+  });
+
+  const chartData = Object.keys(monthGroups).map(month => {
+    const itemsInMonth = monthGroups[month];
+
+    const sales = itemsInMonth.length;
+
+    const profit = itemsInMonth.reduce((sum, item) => {
+      const itemProfit = Number(item.sold_price || 0) - Number(item.purchase_price || 0);
+      return sum + itemProfit;
+    }, 0);
+
+    const revenue = itemsInMonth.reduce((sum, item) => {
+      const itemRevenue = Number(item.sold_price || 0);
+      return sum + itemRevenue
+    }, 0);
+
+    return {
+      month: month,
+      sales: sales,
+      profit: profit,
+      revenue: revenue
+    };
+  });
+
+  return chartData;
+
+
+}
 
 export default Dashboard;

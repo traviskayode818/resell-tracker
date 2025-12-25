@@ -612,3 +612,22 @@ body {
 .stat-percentage.neutral {
   color: #6b7280; /* Gray */
 }
+
+/* ============================================
+   CHARTS
+   ============================================ */
+
+.chart-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #111827;
+}
