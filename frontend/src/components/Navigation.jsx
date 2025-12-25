@@ -22,6 +22,13 @@ function Navigation() {
       >
         Inventory Management
       </NavLink>
+
+      <NavLink
+      to="/add-item"
+      className={({ isActive }) => isActive ? 'nav-tab active' : 'nav-tab'}
+      >
+        Add Item
+      </NavLink>
     </nav>
   );
 }

@@ -12,6 +12,8 @@ import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
 import './App.css';
 import Inventory from './components/Inventory';
+import AddItem from './components/AddItem';
+
 
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Dashboard />} />
               <Route path='inventory' element={<Inventory />} />
+              <Route path='add-item' element={<AddItem/>} />
             </Routes>
           </section>
         </main>

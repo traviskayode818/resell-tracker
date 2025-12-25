@@ -67,6 +67,7 @@ function Dashboard() {
       {/* Stats cards */}
       <div className="stats-grid">
         <div className="stat-card">
+          <p className='stat-label-emoji'>💷</p>
           <p className="stat-label">Total Revenue</p>
           <p className="stat-value">£{stats.revenue}</p>
             <p className={`stat-percentage ${stats.revenueChange.direction.toLowerCase()}`}>
@@ -74,18 +75,21 @@ function Dashboard() {
               </p>
         </div>
         <div className="stat-card">
+          <p className='stat-label-emoji'>📈</p>
           <p className="stat-label">Total Profit</p>
           <p className="stat-value">£{stats.profit}</p>
+          <p className={`stat-percentage ${stats.profitChange.direction.toLowerCase()}`}>
+            {stats.profitChange.formattedString} vs last {timePeriod.toLowerCase()}
+          </p>
         </div>
         <div className="stat-card">
+          <p className='stat-label-emoji'>📦</p>
           <p className="stat-label">Items Sold</p>
           <p className="stat-value">{stats.sold}</p>
-        </div>
-         <div className="stat-card">
-          <p className="stat-label">Total Cost</p>
-          <p className="stat-value">£{stats.cost}</p>
-        </div>
-        
+          <p className={`stat-percentage ${stats.amountSoldChange.direction.toLowerCase()}`}>
+            {stats.amountSoldChange.formattedString} vs last {timePeriod.toLowerCase()}
+          </p>
+        </div>        
       </div>
 
       {/* Chart will go here later */}
@@ -162,7 +166,6 @@ function calculateStats(items, period) {
 
     const soldDate = new Date(item.sold_date);
 
-     // ✅ ADD THIS DEBUG LOG
   console.log('Checking item:', item.name, 'sold on:', soldDate, 
                 'Is between', previousStartDate, 'and', previousEndDate, '?',
                 soldDate >= previousStartDate && soldDate <= previousEndDate);
@@ -185,10 +188,8 @@ function calculateStats(items, period) {
     return sum + Number(item.sold_price || 0);
   }, 0);
 
-
-
   const revenueChange = (revenue, prevRevenue) => {
-    
+  
     if (prevRevenue === 0) {
       return {
         percentageChange : 0,
@@ -224,6 +225,7 @@ function calculateStats(items, period) {
 
   console.log('Revenue Change:', revenueChangeData);
 
+
   // Calculate profit (sales - costs)
   const profit = soldItems.reduce((sum, item) => {
     const salePrice = Number(item.sold_price || 0);
@@ -237,7 +239,38 @@ function calculateStats(items, period) {
     return sum + (salePrice - cost);
   }, 0);
 
-  const profitChange = ((profit - prevProfit) / prevProfit) * 100;
+  const profitChange = (profit, prevProfit) => {
+    if (prevProfit === 0) {
+      return {
+        percentageChange: 0,
+        direction: 'NEUTRAL',
+        formattedString: 'N/A'
+      }
+    }
+
+      const percentageChange = ((profit - prevProfit) / prevProfit) * 100;
+      let direction;
+      let formattedString;
+
+      if (percentageChange >= 1) {
+        direction = 'UP';
+        formattedString = percentageChange.toFixed(1) + '%';
+      }else if (percentageChange <= -1) {
+        direction = 'DOWN';
+        formattedString = percentageChange.toFixed(1) + '%';
+      }else if (percentageChange === 0) {
+        direction = 'NEUTRAL';
+        formattedString = '0%'
+      }
+
+      return{
+        percentageChange: percentageChange,
+        direction: direction,
+        formattedString: formattedString
+      };
+    };
+
+  const profitChangeData = profitChange(profit, prevProfit);
 
   const cost = soldItems.reduce((sum, item )  => {
     return sum + Number(item.purchase_price)
@@ -248,7 +281,30 @@ function calculateStats(items, period) {
 
   const prevSold = prevSoldItems.length;
 
-  const soldChange = ((sold - prevSold) / prevSold) * 100;
+  const amountSoldChange = (sold, prevSold) => {
+    const amountChange = sold - prevSold;
+    let direction;
+    let formattedString;
+
+    if(amountChange >= 1) {
+      direction = 'UP';
+      formattedString = '+' + amountChange;
+    }else if (amountChange <= -1) {
+      direction = 'DOWN';
+      formattedString = amountChange;
+    }else if (amountChange === 0 ) {
+      direction = 'NEUTRAL';
+      formattedString = 0;
+    }
+
+    return {
+      amountChange: amountChange,
+      direction: direction,
+      formattedString: formattedString
+    }
+  }
+
+  const amountSoldChangeData = amountSoldChange(sold, prevSold);
 
   return {
     revenue: revenue.toFixed(0),
@@ -256,6 +312,8 @@ function calculateStats(items, period) {
     sold: sold,
     cost: cost,
     revenueChange: revenueChangeData,
+    profitChange: profitChangeData,
+    amountSoldChange: amountSoldChangeData,
     previousEndDate: previousEndDate
   };
 }

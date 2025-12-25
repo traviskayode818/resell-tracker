@@ -76,36 +76,6 @@ function ItemsList() {
   };
 
   /**
-   * Handles adding a new item to inventory
-   * Sends POST request to API and updates local state
-   */
-  const handleAddItem = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/items`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newItem),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add item');
-      }
-
-      const createdItem = await response.json();
-      // Add new item to the beginning of the list for immediate visibility
-      setItems([createdItem, ...items]);
-      // Reset form and hide it
-      setNewItem(INITIAL_NEW_ITEM_STATE);
-      setShowAddForm(false);
-    } catch (err) {
-      console.error('Error adding item:', err);
-      alert('Error adding item');
-    }
-  };
-
-  /**
    * Initiates the selling process for a specific item
    * Opens the sell form and resets its values
    */
@@ -204,7 +174,7 @@ function ItemsList() {
     const totalRevenue = items.reduce((sum, item) => {
       const price = Number(item.sold_price ?? item.sale_price ?? 0);
       return sum + price;
-    }, 0);
+    }, 0);  
 
     const totalProfit = items.reduce((sum, item) => {
       if (!item.sold_price) return sum;
@@ -216,11 +186,17 @@ function ItemsList() {
       return sum + profit;
     }, 0);
 
-    const totalCost = items.reduce((sum, item) => {
-      const cost = Number(item.purchase_price);
+    const unsoldItems = items.filter(item =>{
+      if (item.status == 'SOLD') return false;
 
+      return items;
+    });
+
+    const totalCost = unsoldItems.reduce((sum, item) => {
+      const cost = Number(item.purchase_price);
       return sum + cost;
     }, 0);
+
 
     return { totalItems, availableItems, soldItems, totalRevenue, totalProfit, totalCost};
   };
@@ -298,80 +274,8 @@ function ItemsList() {
             Sold
           </button>
         </div>
-
-        {/* Button to show the add item form */}
-        <button className="add-item-btn" onClick={() => setShowAddForm(true)}>
-          + Add Item
-        </button>
       </div>
 
-      {/* Add Item Form - conditionally rendered */}
-      {showAddForm && (
-        <div className="add-item-form">
-          <h3>Add New Item</h3>
-          
-          {/* Item Name Input */}
-          <div className="form-row">
-            <label>
-              Name
-              <input
-                type="text"
-                value={newItem.name}
-                onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-                placeholder="e.g. Jordan 4 Thunder"
-              />
-            </label>
-          </div>
-
-          {/* Item Size Input */}
-          <div className="form-row">
-            <label>
-              Size
-              <input
-                type="text"
-                value={newItem.size}
-                onChange={(e) => setNewItem({ ...newItem, size: e.target.value })}
-                placeholder="e.g. UK9"
-              />
-            </label>
-          </div>
-
-          {/* Purchase Price Input */}
-          <div className="form-row">
-            <label>
-              Cost (£)
-              <input
-                type="number"
-                value={newItem.purchase_price}
-                onChange={(e) => setNewItem({ ...newItem, purchase_price: e.target.value })}
-                placeholder="e.g. 120"
-              />
-            </label>
-          </div>
-
-          {/* Purchase Date Input */}
-          <div className="form-row">
-            <label>
-              Date Brought
-              <input
-                type="date"
-                value={newItem.purchase_date}
-                onChange={(e) => setNewItem({ ...newItem, purchase_date: e.target.value })}
-              />
-            </label>
-          </div>
-
-          {/* Form Action Buttons */}
-          <div className="form-actions">
-            <button className="add-item-btn" onClick={handleAddItem}>
-              Save Item
-            </button>
-            <button className="cancel-btn" onClick={() => setShowAddForm(false)}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Items List - displays all filtered items */}
       <div className="items-list">

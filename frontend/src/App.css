@@ -15,7 +15,7 @@ body {
 .app-root {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #4f46e5, #6366f1, #a855f7);
+  background: linear-gradient(135deg, #0047AB,#82C8E5);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -35,7 +35,7 @@ body {
 
 /* Main content card with shadow and rounded corners */
 .app-card {
-  background: #ffffff;
+  background: #fff;
   border-radius: 24px;
   padding: 24px 20px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
@@ -91,7 +91,7 @@ body {
 /* Active tab styling (selected) */
 .nav-tab.active {
   background: #ffffff;
-  color: #5b21b6;
+  color: #0047AB;
   border: 3px solid #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -161,8 +161,8 @@ body {
 
 /* Active/selected filter button state */
 .filter-active {
-  background: #4f46e5;
-  border-color: #4f46e5;
+  background: #0047AB;
+  border-color: #0047AB;
   color: #ffffff;
 }
 
@@ -354,36 +354,33 @@ body {
   margin-bottom: 16px;
   padding: 16px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.add-item-form h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 1rem;
+  background:#fff;
 }
 
 /* Form row container for input fields */
 .form-row {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 /* Label styling for form inputs */
 .form-row label {
   display: flex;
   flex-direction: column;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
+  color:#000000;
+  font-weight: 600;
   gap: 4px;
 }
 
 /* Input field styling within forms */
 .form-row input {
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
+  padding: 16px 8px;
+  border-radius: 10px;
+  border: 1px solid #000000;
   background: #ffffff;
-  color: #111827;
+  color: #000000;
+  font-size: 0.9rem;
+  font-weight: 800;
 }
 
 /* Form action buttons container */
@@ -393,15 +390,7 @@ body {
   gap: 8px;
 }
 
-/* Placeholder for add item button (unused) */
-.add-item-placeholder {
-  margin-bottom: 16px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px dashed rgba(255, 255, 255, 0.4);
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
+
 
 /* ============================================
    SELL FORM (INLINE)
@@ -551,8 +540,8 @@ body {
 }
 
 .period-selector button.active {
-  background: #4f46e5;
-  border-color: #4f46e5;
+  background: #0047AB;
+  border-color: #0047AB;
   color: #ffffff;
 }
 
@@ -572,7 +561,10 @@ body {
   border: 1px solid #e5e7eb;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-
+.stat-label-emoji {
+  font-size: 2rem;
+  margin: 0;
+}
 .stat-label {
   font-size: 0.9rem;
   color: #6b7280;
