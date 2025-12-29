@@ -647,19 +647,7 @@ body {
    CHARTS
    ============================================ */
 
-.chart-container {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-.chart-container h3 {
-  color: #ffffff;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
 
 .chart-container {
   background: white;
@@ -667,6 +655,7 @@ body {
   border-radius: 1rem;
   border: 1px solid #e5e7eb;
   margin-bottom: 1.5rem;
+  overflow-x: auto;
 }
 
 .chart-container h3 {
@@ -674,4 +663,10 @@ body {
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .chart-container .recharts-wrapper {
+    min-width: 600px; /* Forces horizontal scroll */
+  }
 }
