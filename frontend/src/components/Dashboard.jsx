@@ -109,6 +109,8 @@ function Dashboard() {
       </div>
       <div className='chart-container'>
         <h3>Profit & Revenue Trends</h3>
+        <div style={{overflowX: 'auto'}}>
+        <div style={{minWidth: '600px'}}>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={chartData}>
             <defs>
@@ -150,9 +152,13 @@ function Dashboard() {
             />
           </AreaChart>
         </ResponsiveContainer>
+        </div>
+        </div>
       </div>
       <div className="chart-container">
       <h3>Sales Trend</h3>
+      <div style={{overflowX: 'auto'}}>
+      <div style={{minWidth: '600px'}}>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData}>
           <defs>
@@ -178,6 +184,8 @@ function Dashboard() {
           />
         </BarChart>
       </ResponsiveContainer>
+      </div>
+      </div>
     </div>
     </div>
   );

@@ -664,9 +664,3 @@ body {
   color: #1e293b;
   margin-bottom: 1rem;
 }
-
-@media (max-width: 768px) {
-  .chart-container .recharts-wrapper {
-    min-width: 600px; /* Forces horizontal scroll */
-  }
-}
