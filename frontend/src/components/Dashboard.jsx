@@ -108,27 +108,45 @@ function Dashboard() {
         </div>        
       </div>
       <div className='chart-container'>
-        <h3>Profit Trend</h3>
+        <h3>Profit & Revenue Trends</h3>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={chartData}>
+            <defs>
+            {/* Revenue gradient - bright cyan */}
+              <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.6}/>
+                <stop offset="95%" stopColor="#06b6d4" stopOpacity={0.05}/>
+              </linearGradient>
+        
+            {/* Profit gradient - emerald green */}
+              <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#10b981" stopOpacity={0.6}/>
+                <stop offset="95%" stopColor="#10b981" stopOpacity={0.05}/>
+               </linearGradient>
+            </defs>
             <CartesianGrid strokeDasharray='3 3'/>
-            <XAxis dataKey='month'/>
-            <YAxis/>
+            <XAxis 
+              dataKey='month'
+              stroke="#64748b"
+              tick={{ fill: '#64748b', fontSize: 12 }}
+              axisLine={{ stroke: '#475569' }}
+            />
+            <YAxis hide/>
             <Tooltip/>
             <Legend/>
             <Area
             type='linear'
             dataKey='revenue'
-            stroke='#002e6dff'
-            fill='#00347cff'
-            fillOpacity={0.3}
+            stroke='#06b6d4'
+            strokeWidth={3}
+            fill='url(#colorRevenue)'
             />
             <Area
             type='linear'
             dataKey='profit'
             stroke='#02aa40ff'
-            fill='#00b141ff'
-            fillOpacity={0.3}
+            strokeWidth={3}
+            fill='url(#colorProfit)'
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -136,14 +154,29 @@ function Dashboard() {
       <div className="chart-container">
       <h3>Sales Trend</h3>
       <ResponsiveContainer width="100%" height={300}>
-        <PieChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" />
+        <BarChart data={chartData}>
+          <defs>
+            <linearGradient id="colorBar" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3b82f6" stopOpacity={1}/>
+              <stop offset="100%" stopColor="#2563eb" stopOpacity={0.9}/>
+            </linearGradient>
+          </defs>
+          <CartesianGrid 
+            strokeDasharray="0" 
+            stroke="#f1f5f9" 
+            vertical={false}
+          />
           <XAxis dataKey="month" />
           <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="sales" fill="#0047AB" name="Items Sold" />
-        </PieChart>
+          <Tooltip/>
+          <Legend/>
+          <Bar 
+            dataKey="sales" 
+            fill="url(#colorBar)" 
+            name="Items Sold"
+            radius={[8, 8, 0, 0]}
+          />
+        </BarChart>
       </ResponsiveContainer>
     </div>
     </div>

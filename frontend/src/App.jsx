@@ -13,6 +13,7 @@ import Dashboard from './components/Dashboard';
 import './App.css';
 import Inventory from './components/Inventory';
 import AddItem from './components/AddItem';
+import logo from './assets/logo.png';
 
 
 
@@ -24,8 +25,8 @@ function App() {
       <div className="app-shell">
         {/* Application header with title and description */}
         <header className="app-header">
-          <h1>SoleTracker</h1>
-          <p>Inventory and sales tracker for RMkicks.</p>
+          <img src={logo} alt="Sole Tracker" className='app-logo' />
+          <p>Know your stock. Track every sale. </p>
         </header>
 
         <Navigation/>

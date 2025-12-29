@@ -47,6 +47,36 @@ body {
   font-size: 1.3rem;
   color: #111827;
 }
+
+.app-logo {
+  height: 150px;
+  width: auto;
+  max-width: 90%;
+  display: block;
+  margin: 0 auto 0.5rem;
+  
+}
+
+.app-header p{
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .app-logo {
+    height: 100px;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
+  }
+}
+
 /* ============================================
    TAB-STYLE NAVIGATION
    ============================================ */
@@ -437,7 +467,7 @@ body {
   }
   
   /* Make header text smaller */
-  .app-header h1 {
+  .app-header{
     font-size: 1.5rem;
   }
   
@@ -619,15 +649,29 @@ body {
 
 .chart-container {
   background: #ffffff;
-  padding: 20px;
-  border-radius: 16px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .chart-container h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-  color: #111827;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.chart-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+.chart-container h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
 }
